@@ -1,0 +1,35 @@
+THIS FILE IS COMPARED TO TOK
+****************test***************
+compared_pose_pairs 2624 pairs
+absolute_translational_error.rmse 1.408117 m
+absolute_translational_error.mean 1.273725 m
+absolute_translational_error.median 1.155058 m
+absolute_translational_error.std 0.600347 m
+absolute_translational_error.min 0.123523 m
+absolute_translational_error.max 3.578258 m
+max idx: 1649
+compared_pose_pairs 2624 pairs
+absolute_translational_error.rmse 1.408117 m
+absolute_translational_errorGT.rmse 0.038763 m
+****************slam***************
+compared_pose_pairs 2624 pairs
+absolute_translational_error.rmse 1.360770 m
+absolute_translational_error.mean 1.231449 m
+absolute_translational_error.median 1.125064 m
+absolute_translational_error.std 0.578988 m
+absolute_translational_error.min 0.116307 m
+absolute_translational_error.max 3.459629 m
+max idx: 1649
+compared_pose_pairs 2624 pairs
+absolute_translational_error.rmse 1.360770 m
+absolute_translational_errorGT.rmse 0.034737 m
+****************diff***************
+compared_pose_pairs 0 pairs
+absolute_translational_error.rmse 0.047347 m
+absolute_translational_error.mean 0.042276 m
+absolute_translational_error.median 0.029994 m
+absolute_translational_error.std 0.021359 m
+absolute_translational_error.min 0.007216 m
+absolute_translational_error.max 0.118628 m
+absolute_translational_error.rmse 0.047347 m
+absolute_translational_errorGT.rmse 0.004025 m

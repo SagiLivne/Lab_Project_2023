@@ -1,0 +1,34 @@
+****************test***************
+compared_pose_pairs 2622 pairs
+absolute_translational_error.rmse 2.365928 m
+absolute_translational_error.mean 2.142932 m
+absolute_translational_error.median 1.953157 m
+absolute_translational_error.std 1.002726 m
+absolute_translational_error.min 0.193990 m
+absolute_translational_error.max 5.974461 m
+max idx: 1646
+compared_pose_pairs 2622 pairs
+absolute_translational_error.rmse 2.365928 m
+absolute_translational_errorGT.rmse 0.042938 m
+****************slam***************
+compared_pose_pairs 2622 pairs
+absolute_translational_error.rmse 2.365928 m
+absolute_translational_error.mean 2.142932 m
+absolute_translational_error.median 1.953157 m
+absolute_translational_error.std 1.002726 m
+absolute_translational_error.min 0.193990 m
+absolute_translational_error.max 5.974461 m
+max idx: 1646
+compared_pose_pairs 2622 pairs
+absolute_translational_error.rmse 2.365928 m
+absolute_translational_errorGT.rmse 0.042938 m
+****************diff***************
+compared_pose_pairs 0 pairs
+absolute_translational_error.rmse 0.000000 m
+absolute_translational_error.mean 0.000000 m
+absolute_translational_error.median 0.000000 m
+absolute_translational_error.std 0.000000 m
+absolute_translational_error.min 0.000000 m
+absolute_translational_error.max 0.000000 m
+absolute_translational_error.rmse 0.000000 m
+absolute_translational_errorGT.rmse 0.000000 m

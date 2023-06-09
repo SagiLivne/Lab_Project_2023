@@ -986,8 +986,7 @@ namespace ORB_SLAM3
                                                                     : (idx1 < pKF1 -> NLeft) ? pKF1 -> mvKeys[idx1]
                                                                                              : pKF1 -> mvKeysRight[idx1 - pKF1 -> NLeft];
 
-                    const bool bRight1 = (pKF1 -> NLeft == -1 || idx1 < pKF1 -> NLeft) ? false
-                                                                                       : true;
+                    const bool bRight1 = !(pKF1 -> NLeft == -1 || idx1 < pKF1 -> NLeft);
 
                     const cv::Mat &d1 = pKF1->mDescriptors.row(idx1);
 
@@ -1020,8 +1019,7 @@ namespace ORB_SLAM3
                         const cv::KeyPoint &kp2 = (pKF2 -> NLeft == -1) ? pKF2->mvKeysUn[idx2]
                                                                         : (idx2 < pKF2 -> NLeft) ? pKF2 -> mvKeys[idx2]
                                                                                                  : pKF2 -> mvKeysRight[idx2 - pKF2 -> NLeft];
-                        const bool bRight2 = (pKF2 -> NLeft == -1 || idx2 < pKF2 -> NLeft) ? false
-                                                                                           : true;
+                        const bool bRight2 = !(pKF2 -> NLeft == -1 || idx2 < pKF2 -> NLeft);
 
                         if(!bStereo1 && !bStereo2 && !pKF1->mpCamera2)
                         {

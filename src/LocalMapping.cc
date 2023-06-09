@@ -27,6 +27,10 @@
 #include<mutex>
 #include<chrono>
 
+std::ofstream ofs_kf("kf_times.txt"); //Per searchForTraingulation.
+std::ofstream ofs_f("f_times.txt"); //Per vocabulary.
+
+
 namespace ORB_SLAM3
 {
 
@@ -391,9 +395,9 @@ void LocalMapping::CreateNewMapPoints()
     int nn = 10;
     // For stereo inertial case
     if(mbMonocular)
-        nn=30;
+        nn=15;//Changed from 30
     vector<KeyFrame*> vpNeighKFs = mpCurrentKeyFrame->GetBestCovisibilityKeyFrames(nn);
-
+    
     if (mbInertial)
     {
         KeyFrame* pKF = mpCurrentKeyFrame;
@@ -431,6 +435,10 @@ void LocalMapping::CreateNewMapPoints()
     int countStereoAttempt = 0;
     int totalStereoPts = 0;
     // Search matches with epipolar restriction and triangulate
+
+
+    std::chrono::steady_clock::time_point f_t1 = std::chrono::steady_clock::now();
+
     for(size_t i=0; i<vpNeighKFs.size(); i++)
     {
         if(i>0 && CheckNewKeyFrames())
@@ -463,7 +471,22 @@ void LocalMapping::CreateNewMapPoints()
         vector<pair<size_t,size_t> > vMatchedIndices;
         bool bCoarse = mbInertial && mpTracker->mState==Tracking::RECENTLY_LOST && mpCurrentKeyFrame->GetMap()->GetIniertialBA2();
 
+        std::chrono::steady_clock::time_point kf_t1 = std::chrono::steady_clock::now();
+
         matcher.SearchForTriangulation(mpCurrentKeyFrame,pKF2,vMatchedIndices,false,bCoarse);
+        
+        std::chrono::steady_clock::time_point kf_t2 = std::chrono::steady_clock::now();
+
+        ofs_kf.open ("kf_times.txt", std::ofstream::out | std::ofstream::app);
+        if (ofs_kf.is_open()) {
+            // Write data to the file
+            ofs_kf << std::chrono::duration_cast<std::chrono::duration<double,std::milli>>(kf_t2 - kf_t1).count() << "\n";
+            ofs_kf.close();
+        }
+        else
+        {
+            cout << "FAILED TO WRITE TO FILE\n";
+        }
 
         Sophus::SE3<float> sophTcw2 = pKF2->GetPose();
         Eigen::Matrix<float,3,4> eigTcw2 = sophTcw2.matrix3x4();
@@ -708,7 +731,22 @@ void LocalMapping::CreateNewMapPoints()
             mpAtlas->AddMapPoint(pMP);
             mlpRecentAddedMapPoints.push_back(pMP);
         }
+
     }    
+    
+    std::chrono::steady_clock::time_point f_t2 = std::chrono::steady_clock::now();
+
+    ofs_f.open ("f_times.txt", std::ofstream::out | std::ofstream::app);
+    if (ofs_f.is_open()) {
+        // Write data to the file
+        ofs_f << std::chrono::duration_cast<std::chrono::duration<double,std::milli>>(f_t2 - f_t1).count() << "\n";
+        ofs_f.close();
+    }
+    else
+    {
+        cout << "FAILED TO WRITE TO FILE\n";
+    }
+
 }
 
 void LocalMapping::SearchInNeighbors()
@@ -716,7 +754,7 @@ void LocalMapping::SearchInNeighbors()
     // Retrieve neighbor keyframes
     int nn = 10;
     if(mbMonocular)
-        nn=30;
+        nn=10;
     const vector<KeyFrame*> vpNeighKFs = mpCurrentKeyFrame->GetBestCovisibilityKeyFrames(nn);
     vector<KeyFrame*> vpTargetKFs;
     for(vector<KeyFrame*>::const_iterator vit=vpNeighKFs.begin(), vend=vpNeighKFs.end(); vit!=vend; vit++)

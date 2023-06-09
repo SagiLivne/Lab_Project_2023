@@ -87,7 +87,7 @@ namespace ORB_SLAM3 {
         virtual Eigen::Matrix3f& toK_() = 0;
 
         virtual bool epipolarConstrain(GeometricCamera* otherCamera, const cv::KeyPoint& kp1, const cv::KeyPoint& kp2, const Eigen::Matrix3f& R12, const Eigen::Vector3f& t12, const float sigmaLevel, const float unc) = 0;
-
+        
         float getParameter(const int i){return mvParameters[i];}
         void setParameter(const float p, const size_t i){
             mvParameters[i] = p;
